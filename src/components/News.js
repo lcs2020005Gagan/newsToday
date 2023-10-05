@@ -28,11 +28,11 @@ const News = (props)=>{
         setLoading(true)
         props.setShowpro(true)
         props.setProgress(15);
-        let url=!props.searchBool?`http://newsapi.org/v2/everything?q=${props.category}&apiKey=${apiKey}&page=${page}&pageSize=${props.pageSize}`:`https://newsapi.org/v2/everything?q=${props.text}&apiKey=${apiKey}&page=${page}&pageSize=${props.pageSize}`
+        let url=!props.searchBool?`https://newsapi.org/v2/everything?q=${props.category}&apiKey=${apiKey}&page=${page}&pageSize=${props.pageSize}`:`https://newsapi.org/v2/everything?q=${props.text}&apiKey=${apiKey}&page=${page}&pageSize=${props.pageSize}`
         props.setProgress(20)
 
        await axios.get(url).then(res=>{
-            console.log(res.data)
+            console.log("got data",res.data)
             props.setProgress(80)
             setArticles(res.data.articles)
             setTotalResults(res.data.totalResults)
@@ -41,7 +41,6 @@ const News = (props)=>{
             setLoading(false);
             props.setProgress(100);
             props.setShowpro(false);
-            // props.setProgress(0);
             
         })
         .catch(err=>{
@@ -64,7 +63,7 @@ const News = (props)=>{
     {
      setLoading(true)   
         console.log("fetching")
-        let url=!props.searchBool?`http://newsapi.org/v2/everything?q=${props.category}&apiKey=${apiKey}&page=${page}&pageSize=${props.pageSize}`:`https://newsapi.org/v2/everything?q=${props.text}&apiKey=${apiKey}&page=${page}&pageSize=${props.pageSize}`
+        let url=!props.searchBool?`https://newsapi.org/v2/everything?q=${props.category}&apiKey=${apiKey}&page=${page}&pageSize=${props.pageSize}`:`https://newsapi.org/v2/everything?q=${props.text}&apiKey=${apiKey}&page=${page}&pageSize=${props.pageSize}`
         axios.get(url).then(res=>{
         // console.log(res.data.articles)
         setArticles(Articles.concat(res.data.articles))
